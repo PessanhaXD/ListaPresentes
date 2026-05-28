@@ -159,7 +159,7 @@ async def mercadopago_webhook(
             )
 
             new_payment = Payment(
-                gift_id=gift_ids[0],
+                gift_ids=gift_ids[0],
                 payer_name=payer_name,
                 payer_whatsapp=payer_whatsapp,
                 mercadopago_payment_id=str(
