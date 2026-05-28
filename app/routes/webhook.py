@@ -14,7 +14,10 @@ async def mercadopago_webhook(
 
     data = await request.json()
 
-    print(data)
+    print(
+        "WEBHOOK:",
+        data
+    )
 
     return {
         "success": True

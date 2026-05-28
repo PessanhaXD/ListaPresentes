@@ -17,7 +17,7 @@ def create_payment(
 ):
 
     return mp_create_payment(
-        gift_id=payment.gift_id,
+        gift_ids=payment.gift_ids,
         payer_name=payment.payer_name,
         payer_whatsapp=payment.payer_whatsapp
     )

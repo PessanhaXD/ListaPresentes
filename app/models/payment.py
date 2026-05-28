@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class PaymentRequest(BaseModel):
 
-    gift_id: int
+    gift_ids: list[int]
 
     payer_name: str
 

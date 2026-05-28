@@ -1,3 +1,4 @@
+import json
 import mercadopago
 
 from app.config.settings import (
@@ -16,7 +17,7 @@ sdk = mercadopago.SDK(
 
 
 def mp_create_payment(
-    gift_id: int,
+    gift_ids: list[int],
     payer_name: str,
     payer_whatsapp: str
 ):
@@ -25,26 +26,38 @@ def mp_create_payment(
 
     try:
 
-        gift = db.query(Gift).filter(
-            Gift.id == gift_id
-        ).first()
+        gifts = db.query(Gift).filter(
+            Gift.id.in_(gift_ids)
+        ).all()
 
-        if not gift:
+        if len(gifts) != len(gift_ids):
 
             return {
                 "success": False,
                 "error": "Gift not found"
             }
 
-        if gift.purchased:
+        for gift in gifts:
 
-            return {
-                "success": False,
-                "error": "Gift already purchased"
-            }
+            if gift.purchased:
 
-        preference_data = {
-            "items": [
+                return {
+                    "success": False,
+                    "error": (
+                        f"Gift {gift.id} "
+                        "already purchased"
+                    )
+                }
+
+        items = []
+
+        total_value = 0
+
+        for gift in gifts:
+
+            total_value += gift.value
+
+            items.append(
                 {
                     "title": gift.name,
                     "quantity": 1,
@@ -53,7 +66,13 @@ def mp_create_payment(
                         gift.value
                     )
                 }
-            ]
+            )
+
+        preference_data = {
+            "items": items,
+            "external_reference": json.dumps(
+                gift_ids
+            )
         }
 
         response = sdk.preference().create(
@@ -64,8 +83,8 @@ def mp_create_payment(
 
         return {
             "success": True,
-            "gift_id": gift.id,
-            "gift_name": gift.name,
+            "gift_ids": gift_ids,
+            "total_value": total_value,
             "payment_url": preference[
                 "init_point"
             ],

@@ -64,12 +64,6 @@ class Payment(Base):
         index=True
     )
 
-    gift_id = Column(
-        Integer,
-        ForeignKey("gifts.id"),
-        nullable=False
-    )
-
     payer_name = Column(
         String(255)
     )
@@ -89,4 +83,29 @@ class Payment(Base):
     created_at = Column(
         DateTime,
         default=datetime.utcnow
+    )
+
+class PaymentGift(Base):
+
+    __tablename__ = "payment_gifts"
+
+    id = Column(
+        Integer,
+        primary_key=True
+    )
+
+    payment_id = Column(
+        Integer,
+        ForeignKey(
+            "payments.id"
+        ),
+        nullable=False
+    )
+
+    gift_id = Column(
+        Integer,
+        ForeignKey(
+            "gifts.id"
+        ),
+        nullable=False
     )
