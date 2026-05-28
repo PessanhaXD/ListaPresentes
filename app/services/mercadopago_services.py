@@ -72,7 +72,9 @@ def mp_create_payment(
             "items": items,
             "external_reference": json.dumps(
                 gift_ids
-            )
+            ),
+            "notification_url":
+                "https://listapresentes.onrender.com/webhook/mercadopago"
         }
 
         response = sdk.preference().create(
