@@ -2,25 +2,28 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.config.settings import (
-    MYSQL_HOST,
-    MYSQL_PORT,
-    MYSQL_USER,
-    MYSQL_PASSWORD,
-    MYSQL_DATABASE
+    POSTGRES_HOST,
+    POSTGRES_PORT,
+    POSTGRES_USER,
+    POSTGRES_PASSWORD,
+    POSTGRES_DATABASE
 )
 
 DATABASE_URL = (
-    f"mysql+pymysql://"
-    f"{MYSQL_USER}:"
-    f"{MYSQL_PASSWORD}@"
-    f"{MYSQL_HOST}:"
-    f"{MYSQL_PORT}/"
-    f"{MYSQL_DATABASE}"
+    f"postgresql+psycopg2://"
+    f"{POSTGRES_USER}:"
+    f"{POSTGRES_PASSWORD}@"
+    f"{POSTGRES_HOST}:"
+    f"{POSTGRES_PORT}/"
+    f"{POSTGRES_DATABASE}"
 )
 
 engine = create_engine(
     DATABASE_URL,
-    pool_pre_ping=True
+    pool_pre_ping=True,
+    connect_args={
+        "sslmode": "require"
+    }
 )
 
 SessionLocal = sessionmaker(
