@@ -16,7 +16,8 @@ from app.database.connection import (
 
 from app.database.models import (
     Gift,
-    Payment
+    Payment,
+    PaymentGift
 )
 
 sdk = mercadopago.SDK(
@@ -159,7 +160,6 @@ async def mercadopago_webhook(
             )
 
             new_payment = Payment(
-                gift_ids=gift_ids[0],
                 payer_name=payer_name,
                 payer_whatsapp=payer_whatsapp,
                 mercadopago_payment_id=str(
@@ -173,6 +173,19 @@ async def mercadopago_webhook(
             db.add(
                 new_payment
             )
+
+            db.flush()
+
+            for gift_id in gift_ids:
+
+                payment_gift = PaymentGift(
+                    payment_id=new_payment.id,
+                    gift_id=gift_id
+                )
+
+                db.add(
+                    payment_gift
+                )
 
             db.commit()
 
