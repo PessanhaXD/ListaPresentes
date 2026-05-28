@@ -1,7 +1,10 @@
 import json
 import mercadopago
 
-from fastapi import APIRouter, Request
+from fastapi import (
+    APIRouter,
+    Request
+)
 
 from app.config.settings import (
     MERCADOPAGO_ACCESS_TOKEN
@@ -12,7 +15,8 @@ from app.database.connection import (
 )
 
 from app.database.models import (
-    Gift
+    Gift,
+    Payment
 )
 
 sdk = mercadopago.SDK(
@@ -40,6 +44,7 @@ async def mercadopago_webhook(
     try:
 
         if "data" not in data:
+
             return {
                 "success": True
             }
@@ -82,10 +87,10 @@ async def mercadopago_webhook(
                 "success": True
             }
 
-        external_reference = (
-            payment.get(
+        external_reference = json.loads(
+            payment[
                 "external_reference"
-            )
+            ]
         )
 
         print(
@@ -93,19 +98,17 @@ async def mercadopago_webhook(
             external_reference
         )
 
-        if not external_reference:
+        gift_ids = external_reference[
+            "gift_ids"
+        ]
 
-            return {
-                "success": False,
-                "error": (
-                    "external_reference "
-                    "não encontrado"
-                )
-            }
+        payer_name = external_reference[
+            "payer_name"
+        ]
 
-        gift_ids = json.loads(
-            external_reference
-        )
+        payer_whatsapp = external_reference[
+            "payer_whatsapp"
+        ]
 
         print(
             "GIFT_IDS:",
@@ -115,6 +118,27 @@ async def mercadopago_webhook(
         db = SessionLocal()
 
         try:
+
+            existing_payment = (
+                db.query(Payment)
+                .filter(
+                    Payment.mercadopago_payment_id
+                    == str(
+                        payment["id"]
+                    )
+                )
+                .first()
+            )
+
+            if existing_payment:
+
+                print(
+                    "PAGAMENTO JÁ PROCESSADO"
+                )
+
+                return {
+                    "success": True
+                }
 
             gifts = (
                 db.query(Gift)
@@ -130,11 +154,30 @@ async def mercadopago_webhook(
 
                 gift.purchased = True
 
+            print(
+                "PRESENTES MARCADOS COMO COMPRADOS"
+            )
+
+            new_payment = Payment(
+                gift_id=gift_ids[0],
+                payer_name=payer_name,
+                payer_whatsapp=payer_whatsapp,
+                mercadopago_payment_id=str(
+                    payment["id"]
+                ),
+                value=payment[
+                    "transaction_amount"
+                ]
+            )
+
+            db.add(
+                new_payment
+            )
+
             db.commit()
 
             print(
-                "PRESENTES MARCADOS "
-                "COMO COMPRADOS"
+                "PAGAMENTO SALVO"
             )
 
         finally:

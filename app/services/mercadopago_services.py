@@ -71,7 +71,11 @@ def mp_create_payment(
         preference_data = {
             "items": items,
             "external_reference": json.dumps(
-                gift_ids
+                {
+                    "gift_ids": gift_ids,
+                    "payer_name": payer_name,
+                    "payer_whatsapp": payer_whatsapp
+                }
             ),
             "notification_url":
                 "https://listapresentes.onrender.com/webhook/mercadopago"
