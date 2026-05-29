@@ -20,6 +20,12 @@ h2 {
   font-weight: 600;
 }
 
+p {
+  width: 60%;
+  font-size: 1.4rem;
+  color: #638246;
+}
+
 a {
   text-decoration: none;
   color: inherit;
