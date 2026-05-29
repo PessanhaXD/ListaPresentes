@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.container h2 {
+  color: #638246;
+}

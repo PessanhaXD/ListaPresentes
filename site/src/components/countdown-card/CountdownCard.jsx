@@ -7,8 +7,8 @@ export function CountdownCard({ value, unit }) {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.value}>{formattedValue}</h2>
-      <h2 className={styles.unit}>{unit}</h2>
+      <h3 className={styles.value}>{formattedValue}</h3>
+      <h3 className={styles.unit}>{unit}</h3>
     </div>
   );
 }

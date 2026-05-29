@@ -11,7 +11,7 @@ export function Hero() {
         {/* Conteúdo */}
         <div className={styles.dataname}>
           <h1>Rafael e Vitória</h1>
-          <h2>15 | 11 | 2026</h2>
+          <h3>15 | 11 | 2026</h3>
         </div>
       </div>
 
