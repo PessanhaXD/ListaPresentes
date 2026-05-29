@@ -1,0 +1,72 @@
+.container {
+  position: relative;
+  height: 100vh;
+
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("../../assets/foto1.jpeg"), url("../../assets/foto2.jpeg"),
+    url("../../assets/foto3.jpeg");
+
+  background-size:
+    100% 100%,
+    33.33% 100%,
+    33.33% 100%,
+    33.33% 100%;
+
+  background-position:
+    center,
+    left center,
+    center center,
+    right center;
+
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+}
+
+.dataname {
+  align-self: center;
+  padding-top: 4%;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-family: Garamond, serif;
+}
+
+.dataname h1 {
+  font-size: 4rem;
+}
+
+.dataname h2 {
+  font-size: 2.5rem;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+
+  transform: translate(-50%, -60%);
+
+  background: rgba(255, 255, 255);
+
+  backdrop-filter: blur(1.5rem);
+
+  border-radius: 2rem;
+
+  max-height: 50%;
+
+  z-index: 1;
+}
+
+.wave {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+
+  width: 100%;
+  height: 8rem;
+
+  display: block;
+}

@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 18rem;
+  margin-bottom: 4rem;
+}
+
+.container p {
+  width: 60%;
+  font-size: 1.4rem;
+  color: #638246;
+}

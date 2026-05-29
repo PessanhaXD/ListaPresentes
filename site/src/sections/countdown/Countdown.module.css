@@ -1,0 +1,24 @@
+.container {
+  background-color: #638246;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.textCountdown {
+  font-family: "Times New Roman", serif;
+  letter-spacing: 0.3rem;
+  color: #fff;
+  padding: 1rem;
+}
+
+.countdown {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  max-width: 90%;
+}
