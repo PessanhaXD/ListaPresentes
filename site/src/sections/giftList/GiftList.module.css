@@ -12,4 +12,18 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  padding: 0 12rem;
+}
+
+.actions button {
+  background-color: #638246;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-family: 'Times New Roman', serif;
+}
+.actions button:hover {
+  background-color: #4a5e2b;
 }
