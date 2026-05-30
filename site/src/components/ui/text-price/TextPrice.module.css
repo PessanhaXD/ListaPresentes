@@ -1,0 +1,13 @@
+.price {
+  display: flex;
+  font-weight: 600;
+  align-items: baseline;
+}
+
+.price span:first-child {
+  font-size: 2rem;
+}
+
+.cents {
+  font-size: 1.4rem;
+}

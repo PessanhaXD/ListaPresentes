@@ -22,8 +22,19 @@
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  font-family: 'Times New Roman', serif;
+  font-family: "Times New Roman", serif;
 }
 .actions button:hover {
   background-color: #4a5e2b;
+}
+
+.gifts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem;
+  max-width: 60%;
+}
+
+.card {
+  border: solid 0.1rem #000;
 }
