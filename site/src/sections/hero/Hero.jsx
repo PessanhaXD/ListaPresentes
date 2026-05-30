@@ -1,6 +1,6 @@
 import React from "react";
 
-import logocasamento from "../../assets/logo-casamento.png";
+import weddingLogo from "../../assets/weddingLogo.png";
 
 import styles from "./Hero.module.css";
 
@@ -11,11 +11,11 @@ export function Hero() {
         {/* Conteúdo */}
         <div className={styles.dataname}>
           <h1>Rafael e Vitória</h1>
-          <h3>15 | 11 | 2026</h3>
+          <h3>Enlace</h3>
         </div>
       </div>
 
-      <img className={styles.logo} src={logocasamento} alt='' />
+      <img className={styles.logo} src={weddingLogo} alt='' />
 
       <svg
         className={styles.wave}

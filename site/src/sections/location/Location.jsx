@@ -2,8 +2,6 @@ import React from "react";
 
 import styles from "./Location.module.css";
 
-import weddingLocation from "../../assets/location.png";
-
 import { TitleSVG } from "../../components/title_svg/TitleSVG";
 
 export function Location() {

@@ -4,8 +4,8 @@
 
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("../../assets/foto1.jpeg"), url("../../assets/foto2.jpeg"),
-    url("../../assets/foto3.jpeg");
+    url("../../assets/photo1.jpeg"), url("../../assets/photo2.jpeg"),
+    url("../../assets/photo3.jpeg");
 
   background-size:
     100% 100%,
