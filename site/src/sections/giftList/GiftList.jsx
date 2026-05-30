@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import styles from "./GiftList.module.css";
 
+import { PiShoppingCartThin } from "react-icons/pi";
+
 import { TitleSVG } from "../../components/title_svg/TitleSVG";
 import { list_gifts } from "../../services/gifts.js";
+
+import { CardProduct } from "../../components/card-product/CardProduct.jsx";
 
 export function GiftList() {
   const [gifts, setGifts] = useState([]);
@@ -41,7 +45,9 @@ export function GiftList() {
       <TitleSVG title='LISTA DE PRESENTES' />
 
       <div className={styles.actions}>
-        <button>Carrinho</button>
+        <button>
+          <PiShoppingCartThin /> Carrinho
+        </button>
 
         <h3>Ordenar a lista por:</h3>
       </div>
@@ -53,13 +59,7 @@ export function GiftList() {
       {!loading && !error && (
         <div className={styles.gifts}>
           {gifts.map((gift) => (
-            <div key={gift.id} className={styles.card}>
-              <h3>{gift.name}</h3>
-
-              <p>{gift.description}</p>
-
-              <span>R$ {Number(gift.value).toFixed(2)}</span>
-            </div>
+            <CardProduct key={gift.id} {...gift} />
           ))}
         </div>
       )}

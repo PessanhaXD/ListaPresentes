@@ -5,6 +5,7 @@
   align-items: center;
   max-width: 60%;
   margin: 0 auto;
+  gap: 4rem;
 }
 
 .actions {
@@ -12,7 +13,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0 12rem;
+  padding: 0 9rem;
 }
 
 .actions button {
@@ -30,9 +31,9 @@
 
 .gifts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: 2rem;
-  max-width: 60%;
+  max-width: 80%;
 }
 
 .card {

@@ -2,42 +2,33 @@ import { useState } from "react";
 
 import styles from "./CardProduct.module.css";
 
-import { InputIncrement } from "@/components/ui/input-increment/InputIncrement";
-import { PiShoppingCartThin } from "react-icons/pi";
+import { TextPrice } from "../ui/text-price/TextPrice";
 
-import { TextPrice } from "@/components/ui/text-price/TextPrice";
+import defaultImage from "../../assets/weddingLogo.png";
 
-export function CardProduct({
-  product,
-  description,
-  variations,
-  price,
-  image,
-  onClickImg,
-  onClick,
-}) {
-  const [quantity, setQuantity] = useState(1);
-
-  const [integer, cents] = Number(price).toFixed(2).split(".");
+export function CardProduct({ name, description, value, image }) {
+  const imageGift = image || defaultImage;
+  const [integer, cents] = Number(value).toFixed(2).split(".");
 
   return (
     <>
       <div className={styles.card}>
-        <button className={styles.buttonImage} onClick={onClickImg}>
-          <img className={styles.productPhoto} src={image} alt='' />
+        <button className={styles.buttonImage}>
+          <img className={styles.productPhoto} src={imageGift} alt='' />
         </button>
         <div className={styles.infosProduct}>
-          <h3>{product}</h3>
+          <h3>{name}</h3>
 
-          <TextPrice className='globalPrice' integer={integer} cents={cents} />
+          <div className={styles.textPrice}>
+            <TextPrice
+              className={styles.price}
+              integer={integer}
+              cents={cents}
+            />
+          </div>
+
           <div className={styles.actions}>
-            <InputIncrement value={quantity} onChange={setQuantity} />
-            <button
-              className={styles.buttonCart}
-              onClick={() => onClick(quantity)}
-            >
-              Carrinho <PiShoppingCartThin />
-            </button>
+            <button className={styles.buttonCart}>Presentear</button>
           </div>
         </div>
       </div>
