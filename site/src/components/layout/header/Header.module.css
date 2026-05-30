@@ -1,13 +1,36 @@
 .container {
-  background-color: #fff;
   color: #495f33;
-  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.15);
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  padding: 1rem 2rem;
-  width: 100%;
+
+  position: fixed;
   top: 0;
+
+  width: 100%;
+  padding: 1rem 2rem;
+
   z-index: 1000;
+}
+
+.container ul {
+  display: flex;
+  gap: 3rem;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container button {
+  color: white;
+  font-family: "Times New Roman", serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.2rem;
+
+  transition: opacity 0.3s;
+}
+
+.container button:hover {
+  opacity: 0.7;
 }

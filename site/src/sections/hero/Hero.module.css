@@ -20,6 +20,8 @@
     right center;
 
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+
+  z-index: 500;
 }
 
 .dataname {

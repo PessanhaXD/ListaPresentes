@@ -4,7 +4,7 @@ import styles from "./Information.module.css";
 
 export function Information() {
   return (
-    <section className={styles.container}>
+    <section className={styles.container} id='home'>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

@@ -6,7 +6,7 @@ import styles from "./Hero.module.css";
 
 export function Hero() {
   return (
-    <section className={styles.container}>
+    <section className={styles.container} id='hero'>
       <div className={styles.overlay}>
         {/* Conteúdo */}
         <div className={styles.dataname}>

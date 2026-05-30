@@ -41,7 +41,7 @@ export function GiftList() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container} id='gifts'>
       <TitleSVG title='LISTA DE PRESENTES' />
 
       <div className={styles.actions}>
@@ -63,6 +63,6 @@ export function GiftList() {
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 }

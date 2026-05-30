@@ -6,7 +6,7 @@ import { TitleSVG } from "../../components/title_svg/TitleSVG";
 
 export function Location() {
   return (
-    <div className={styles.container}>
+    <section className={styles.container} id='location'>
       <TitleSVG title='LOCAL DA CELEBRAÇÃO' />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
@@ -33,6 +33,6 @@ export function Location() {
         loading='lazy'
         referrerPolicy='no-referrer-when-downgrade'
       ></iframe>
-    </div>
+    </section>
   );
 }

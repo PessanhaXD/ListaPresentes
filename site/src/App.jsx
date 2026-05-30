@@ -8,8 +8,14 @@ import { GiftList } from "./sections/giftList/GiftList";
 export function App() {
   return (
     <>
-      <Header />
       <Hero />
+      <Header
+        links={[
+          { label: "HOME", href: "#home" },
+          { label: "LOCAL DA CELEBRAÇÃO", href: "#location" },
+          { label: "LISTA DE PRESENTES", href: "#gifts" },
+        ]}
+      />
       <Information />
       <Countdown />
       <Location />
