@@ -1,12 +1,22 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.payments import router as payments_router
 from app.routes.gifts import router as gifts_router
 from app.routes.webhook import router as web_router
 
-
 app = FastAPI(
     title="Lista Presentes API"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(payments_router)
