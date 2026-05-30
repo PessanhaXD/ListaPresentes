@@ -1,30 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import styles from './GiftList.module.css';
+import styles from "./GiftList.module.css";
 
-import { TitleSVG } from '../../components/title_svg/TitleSVG';
+import { TitleSVG } from "../../components/title_svg/TitleSVG";
 
-import { list_gifts } from '../../services/gifts.js';
+import { list_gifts } from "../../services/gifts.js";
 
 export function GiftList() {
+  const [gifts, setGifts] = useState([]);
   useEffect(() => {
-    async function loadGifts() {
-      try {
-        console.log('Buscando presentes...');
-
-        const data = await list_gifts();
-
-        console.log('Resposta da API:', data);
-
-        setGifts(data);
-      } catch (error) {
-        console.error('Erro ao buscar presentes:', error);
-      } finally {
-        console.log('Busca de presentes finalizada.');
-      }
-    }
-
-    loadGifts();
+    fetch("https://listapresentes.onrender.com/gifts/")
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
   }, []);
   return (
     <div className={styles.container}>
