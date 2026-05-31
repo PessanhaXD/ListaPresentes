@@ -14,10 +14,13 @@ export function GiftGrid({
   cartList,
   setCartList,
 }) {
+  function openCart() {
+    setCart(true);
+  }
   return (
     <>
       <div className={styles.actions}>
-        <button disabled={cartList.length === 0}>
+        <button disabled={cartList.length === 0} onClick={openCart}>
           <PiShoppingCartThin /> Carrinho
         </button>
 
@@ -37,7 +40,13 @@ export function GiftGrid({
               key={gift.id}
               {...gift}
               onClick={() => {
-                setCartList((prev) => [...prev, gift]);
+                setCartList((prev) => [
+                  ...prev,
+                  {
+                    ...gift,
+                    cartId: crypto.randomUUID(),
+                  },
+                ]);
                 setCart(true);
               }}
             />

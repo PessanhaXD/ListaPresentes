@@ -11,6 +11,16 @@ export function Cart({ setCart, cartList, setCartList }) {
 
   const total = cartList.reduce((sum, gift) => sum + gift.value, 0);
 
+  function removeGift(cartId) {
+    const updatedList = cartList.filter((gift) => gift.cartId !== cartId);
+
+    setCartList(updatedList);
+
+    if (updatedList.length === 0) {
+      setCart(false);
+    }
+  }
+
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Meu carrinho</h3>
@@ -44,7 +54,7 @@ export function Cart({ setCart, cartList, setCartList }) {
                   />
                 </div>
 
-                <button>Remover</button>
+                <button onClick={() => removeGift(gift.cartId)}>Remover</button>
               </div>
             </div>
           );
@@ -53,7 +63,10 @@ export function Cart({ setCart, cartList, setCartList }) {
 
       <h4 className={styles.total}>
         Total: R${" "}
-        {(Number.isInteger(total) ? total : total.toFixed(2)).replace(".", ",")}
+        {total.toLocaleString("pt-BR", {
+          minimumFractionDigits: Number.isInteger(total) ? 0 : 2,
+          maximumFractionDigits: 2,
+        })}
       </h4>
 
       <div className={styles.actions}>
