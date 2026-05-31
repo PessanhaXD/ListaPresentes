@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  border: solid 0.1rem #000;
+  padding: 2rem 2rem;
+  width: 60%;
+  gap: 2rem;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartItem {
+  display: flex;
+  align-items: stretch;
+  gap: 2rem;
+}
+
+.cartColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  flex: 1;
+}
+
+.cartColumn button {
+  align-self: flex-start;
+}
+
+.cartRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.image {
+  max-width: 10rem;
+}
+
+.total {
+  align-self: flex-end;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+}

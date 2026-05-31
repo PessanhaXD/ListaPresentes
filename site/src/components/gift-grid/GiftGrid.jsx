@@ -19,8 +19,6 @@ export function GiftGrid({ setCart }) {
 
         const data = await list_gifts();
 
-        console.log("DATA:", data);
-
         if (Array.isArray(data)) {
           setGifts(data);
         } else {
@@ -49,7 +47,9 @@ export function GiftGrid({ setCart }) {
         <h3>Ordenar a lista por:</h3>
       </div>
 
-      {loading && <p>Carregando presentes...</p>}
+      {loading && (
+        <p style={{ textAlign: "center" }}>Carregando presentes...</p>
+      )}
 
       {error && <p>{error}</p>}
 
