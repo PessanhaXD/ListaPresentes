@@ -5,7 +5,7 @@ import styles from "./GiftList.module.css";
 import { TitleSVG } from "../../components/title_svg/TitleSVG";
 
 import { GiftGrid } from "../../components/gift-grid/GiftGrid";
-import { Cart } from "../../components/cart/Cart";
+import { Cart } from "../../components/cart/Cart.jsx";
 
 import { list_gifts } from "../../services/gifts.js";
 

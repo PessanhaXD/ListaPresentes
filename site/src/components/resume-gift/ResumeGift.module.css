@@ -1,0 +1,68 @@
+.container h4 {
+  font-weight: 400;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.divisorRow {
+  display: flex;
+  gap: 4rem;
+}
+
+.valuesInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 2rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.giftItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personalInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.actions button {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  width: 30%;
+  font-size: 1.6rem;
+}
+
+.actionsAdd {
+  background-color: #f5f5f5;
+  color: #495f33;
+  border: solid 0.1rem #495f33;
+}
+
+.actionsAdd:hover {
+  background-color: #ececec;
+}
+
+.actionsFinish {
+  background-color: #638246;
+  color: #fff;
+  border: solid 0.1rem #638246;
+}
+
+.actionsFinish:hover {
+  background-color: #4f6837;
+}
