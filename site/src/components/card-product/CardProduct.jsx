@@ -6,7 +6,7 @@ import { TextPrice } from "../ui/text-price/TextPrice";
 
 import defaultImage from "../../assets/weddingLogo.png";
 
-export function CardProduct({ name, description, value, image }) {
+export function CardProduct({ name, description, value, image, onClick }) {
   const imageGift = image || defaultImage;
   const [integer, cents] = Number(value).toFixed(2).split(".");
 
@@ -28,7 +28,9 @@ export function CardProduct({ name, description, value, image }) {
           </div>
 
           <div className={styles.actions}>
-            <button className={styles.buttonCart}>Presentear</button>
+            <button className={styles.buttonCart} onClick={onClick}>
+              Presentear
+            </button>
           </div>
         </div>
       </div>
