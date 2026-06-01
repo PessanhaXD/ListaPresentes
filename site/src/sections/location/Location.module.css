@@ -19,3 +19,9 @@
   width: 60%;
   border: 0;
 }
+
+@media (max-width: 768px) {
+  .maps {
+    width: 80%;
+  }
+}

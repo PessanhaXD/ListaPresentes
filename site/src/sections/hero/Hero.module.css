@@ -72,3 +72,9 @@
 
   display: block;
 }
+
+@media (max-width: 768px) {
+  .dataname {
+    padding-top: 12%;
+  }
+}

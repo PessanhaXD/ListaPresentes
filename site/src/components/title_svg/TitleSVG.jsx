@@ -1,5 +1,5 @@
 import React from "react";
-
+import styles from "./TitleSVG.module.css";
 export function TitleSVG({ title }) {
   return (
     <>
@@ -43,7 +43,7 @@ export function TitleSVG({ title }) {
 
         <circle cx='90' cy='20' r='2' fill='#638246' />
       </svg>
-      <h2>{title}</h2>
+      <h2 className={styles.title}>{title}</h2>
     </>
   );
 }

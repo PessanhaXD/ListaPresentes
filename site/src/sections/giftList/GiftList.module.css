@@ -3,42 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 60%;
+  max-width: 80%;
   margin: 0 auto;
   gap: 4rem;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 9rem;
-}
-
-.actions button {
-  background-color: #638246;
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-family: "Times New Roman", serif;
-}
-.actions button:hover:not(:disabled) {
-  background-color: #4a5e2b;
-}
-
-button:disabled {
-  cursor: default;
-  opacity: 0.5;
-}
-
-.gifts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  gap: 2rem;
-  max-width: 80%;
 }
 
 .card {

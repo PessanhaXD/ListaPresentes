@@ -1,6 +1,6 @@
 .container {
-  width: 12rem;
-  height: 10rem;
+  width: 10rem;
+  height: 8rem;
 
   display: flex;
   flex-direction: column;
@@ -21,4 +21,11 @@
 
 .unit {
   font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    min-width: 8em;
+    height: 6rem;
+  }
 }
