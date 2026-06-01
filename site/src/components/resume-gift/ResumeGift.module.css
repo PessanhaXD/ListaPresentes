@@ -33,7 +33,7 @@
 }
 
 .totalRow h4 {
-  font-size: 1.4rem;
+  font-size: 1.6em;
 }
 
 .giftsList {
@@ -92,6 +92,7 @@
   cursor: pointer;
   transition: 0.2s;
   width: 80%;
+  font-size: 1.6rem;
 }
 
 .secondaryButton {
