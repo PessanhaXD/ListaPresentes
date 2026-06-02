@@ -47,20 +47,8 @@ def mp_create_payment(
         if len(payer_whatsapp) != 11:
             return {
                 'success': False,
-                'error':'Número não escrito corretamente'
+                'error':'Whatsapp não preenchido corretamente, digite "DDD + Número de Telefone" '
             }
-
-        for gift in gifts:
-
-            if gift.purchased:
-
-                return {
-                    "success": False,
-                    "error": (
-                        f"Gift {gift.id} "
-                        "already purchased"
-                    )
-                }
 
         items = []
 

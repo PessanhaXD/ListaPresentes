@@ -43,10 +43,6 @@ class Gift(Base):
         String(500)
     )
 
-    purchased = Column(
-        Boolean,
-        default=False
-    )
 
     created_at = Column(
         DateTime,

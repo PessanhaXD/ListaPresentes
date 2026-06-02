@@ -151,13 +151,6 @@ async def mercadopago_webhook(
                 .all()
             )
 
-            for gift in gifts:
-
-                gift.purchased = True
-
-            print(
-                "PRESENTES MARCADOS COMO COMPRADOS"
-            )
 
             new_payment = Payment(
                 payer_name=payer_name,
