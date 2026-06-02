@@ -4,13 +4,22 @@
 
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("../../assets/backgroundHero.png");
+    url("../../assets/photo1.jpeg"), url("../../assets/photo2.jpeg"),
+    url("../../assets/photo3.jpeg");
 
-  background-size: 100% 100%;
+  background-size:
+    100% 100%,
+    33.33% 100%,
+    33.33% 100%,
+    33.33% 100%;
 
-  background-position: center;
+  background-position:
+    center,
+    left center,
+    center center,
+    right center;
 
-  background-repeat: no-repeat;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
 
   z-index: 500;
 }
@@ -85,5 +94,9 @@
   .logo {
     width: 80%;
     height: auto;
+  }
+
+  .container {
+    height: 70vh;
   }
 }
