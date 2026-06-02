@@ -14,7 +14,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "https://https://enlace-rafael-vitoria.web.app/",
+        "https://enlace-rafael-vitoria.web.app/",
     ],
     allow_credentials=True,
     allow_methods=["*"],
