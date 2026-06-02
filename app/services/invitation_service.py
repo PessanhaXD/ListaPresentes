@@ -13,12 +13,14 @@ def create_invitation(
 
     db = SessionLocal()
 
+    guest = name.strip().lower()
+
     try:
 
         existing_invitation = (
             db.query(Invitation)
             .filter(
-                Invitation.name == name
+                Invitation.name == guest
             )
             .first()
         )
@@ -27,11 +29,11 @@ def create_invitation(
 
             return {
                 "success": False,
-                "error": "Guest already confirmed"
+                "error": "Já confirmado"
             }
-
+        
         invitation = Invitation(
-            name=name
+            name=guest
         )
 
         db.add(invitation)
