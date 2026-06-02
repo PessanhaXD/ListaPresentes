@@ -2,12 +2,38 @@ import { useState } from "react";
 
 import styles from "./ResumeGift.module.css";
 
+import { create_payment } from "../../services/payments";
+
 export function ResumeGift({ setResumeCart, cartList }) {
   const total = cartList.reduce((sum, gift) => sum + gift.value, 0);
 
   const [payerName, setPayerName] = useState("");
 
   const [payerWhatsapp, setPayerWhatsapp] = useState("");
+
+  async function payment_create() {
+    try {
+      const gift_ids = cartList.map((gift) => gift.id);
+
+      if (!payerName.trim() || !payerWhatsapp.trim()) {
+        alert("Todos os campos precisam ser preenchidos");
+        return;
+      }
+
+      const response = await create_payment(gift_ids, payerName, payerWhatsapp);
+
+      if (!response.success) {
+        alert(response.error);
+        return;
+      }
+
+      window.open(response.payment_url, "_blank");
+    } catch (error) {
+      console.error(error);
+
+      alert("Erro ao gerar pagamento");
+    }
+  }
 
   return (
     <section className={styles.container}>
@@ -77,7 +103,9 @@ export function ResumeGift({ setResumeCart, cartList }) {
           Voltar para o carrinho
         </button>
 
-        <button className={styles.primaryButton}>Finalizar pedido</button>
+        <button className={styles.primaryButton} onClick={payment_create}>
+          Finalizar pedido
+        </button>
       </div>
     </section>
   );

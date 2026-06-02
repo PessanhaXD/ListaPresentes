@@ -1,5 +1,6 @@
 import json
 import mercadopago
+import re
 
 from app.config.settings import (
     MERCADOPAGO_ACCESS_TOKEN
@@ -35,6 +36,18 @@ def mp_create_payment(
             return {
                 "success": False,
                 "error": "Gift not found"
+            }
+        
+        payer_whatsapp = re.sub(
+            r"\D",
+            "",
+            payer_whatsapp
+        )
+
+        if len(payer_whatsapp) != 11:
+            return {
+                'success': False,
+                'error':'Número não escrito corretamente'
             }
 
         for gift in gifts:
