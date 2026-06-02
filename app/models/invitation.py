@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
 
-class Invitation(BaseModel):
+class InvitationCreate(BaseModel):
 
     name: str
