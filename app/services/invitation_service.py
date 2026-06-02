@@ -13,7 +13,7 @@ def create_invitation(
 
     db = SessionLocal()
 
-    guest = name.strip().lower()
+    guest = name.strip().title()
 
     try:
 
