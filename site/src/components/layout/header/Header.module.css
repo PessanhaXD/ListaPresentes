@@ -26,7 +26,6 @@
   margin: 0;
   padding: 0;
   align-items: center;
-  justify-content: space-between;
 }
 
 .container button {
@@ -54,4 +53,21 @@
 .scrolled {
   background: #fff;
   color: #495f33;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem 2rem;
+  }
+
+  .container ul {
+    gap: 1rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .container button {
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+  }
 }
