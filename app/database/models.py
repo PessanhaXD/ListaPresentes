@@ -30,10 +30,6 @@ class Gift(Base):
         nullable=False
     )
 
-    description = Column(
-        String(1000)
-    )
-
     value = Column(
         Float,
         nullable=False
@@ -105,3 +101,23 @@ class PaymentGift(Base):
         ),
         nullable=False
     )
+
+class Invitation(Base):
+    __tablename__ = 'invitations'
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    name = Column(
+        String(255),
+        nullable=False
+    )
+
+    created_at = Column(
+        DateTime,
+        default=datetime.utcnow
+    )
+

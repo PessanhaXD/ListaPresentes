@@ -17,7 +17,6 @@ def get_gifts():
 
 def create_gift(
     name: str,
-    description: str,
     value: float,
     image: str | None = None
 ):
@@ -28,7 +27,6 @@ def create_gift(
 
         gift = Gift(
             name=name,
-            description=description,
             value=value,
             image=image
         )

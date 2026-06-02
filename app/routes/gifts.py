@@ -26,7 +26,6 @@ def add_gift(
 
     return create_gift(
         name=gift.name,
-        description=gift.description,
         value=gift.value,
         image=gift.image
     )
