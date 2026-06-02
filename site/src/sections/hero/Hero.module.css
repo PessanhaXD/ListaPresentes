@@ -4,22 +4,13 @@
 
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("../../assets/photo1.jpeg"), url("../../assets/photo2.jpeg"),
-    url("../../assets/photo3.jpeg");
+    url("../../assets/backgroundHero.png");
 
-  background-size:
-    100% 100%,
-    33.33% 100%,
-    33.33% 100%,
-    33.33% 100%;
+  background-size: 100% 100%;
 
-  background-position:
-    center,
-    left center,
-    center center,
-    right center;
+  background-position: center;
 
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+  background-repeat: no-repeat;
 
   z-index: 500;
 }
@@ -34,6 +25,7 @@
   justify-content: center;
   text-transform: uppercase;
   font-family: Garamond, serif;
+  text-align: center;
 }
 
 .dataname h1 {
@@ -71,10 +63,27 @@
   height: 8rem;
 
   display: block;
+
+  color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .wave {
+    color: #000;
+  }
+
+  .logo {
+    background-color: #000;
+  }
 }
 
 @media (max-width: 768px) {
   .dataname {
     padding-top: 12%;
+  }
+
+  .logo {
+    width: 80%;
+    height: auto;
   }
 }

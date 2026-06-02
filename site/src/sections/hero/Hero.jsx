@@ -23,7 +23,7 @@ export function Hero() {
         preserveAspectRatio='none'
       >
         <path
-          fill='#ffffff'
+          fill='currentColor'
           d='
             M0,64
             C120,120 240,20 360,64

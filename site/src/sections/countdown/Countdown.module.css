@@ -23,3 +23,10 @@
   padding: 1rem;
   max-width: 90%;
 }
+
+@media (max-width: 768px) {
+  .countdown {
+    gap: 1rem;
+    padding: 0rem;
+  }
+}

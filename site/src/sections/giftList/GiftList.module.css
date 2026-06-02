@@ -11,3 +11,9 @@
 .card {
   border: solid 0.1rem #000;
 }
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    border: solid 0.1rem #343434;
+  }
+}

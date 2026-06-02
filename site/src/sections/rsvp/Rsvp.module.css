@@ -67,3 +67,33 @@
 .content button:hover {
   background: #ececec;
 }
+
+@media (prefers-color-scheme: dark) {
+  .content button {
+    background: #343434;
+    border-color: #343434;
+    color: #f5f5f5;
+  }
+
+  .content button:hover {
+    background: #252525;
+  }
+
+  .input input {
+    border: 0.1rem solid #343434;
+  }
+
+  .input input:focus {
+    border-color: #252525;
+  }
+
+  .content {
+    border: solid 0.1rem #343434;
+  }
+}
+
+@media (max-width: 768px) {
+  .input {
+    width: 80%;
+  }
+}
