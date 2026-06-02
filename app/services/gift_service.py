@@ -28,7 +28,11 @@ def create_gift(
         gift = Gift(
             name=name,
             value=value,
-            image=image
+            image=(
+                f'https://ipmpmkevpsabdhbeotxc.supabase.co/storage/v1/object/public/gift-images/{image}'
+                if image
+                else None
+            )
         )
 
         db.add(gift)
