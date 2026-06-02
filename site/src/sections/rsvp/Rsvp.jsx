@@ -4,8 +4,30 @@ import styles from "./Rsvp.module.css";
 
 import { TitleSVG } from "../../components/title_svg/TitleSVG";
 
+import { create_confirmation } from "../../services/invites";
+
 export function Rsvp() {
   const [fullName, setFullName] = useState("");
+
+  async function confirmation_create() {
+    if (!fullName.trim()) {
+      alert("Informe o nome completo");
+
+      return;
+    }
+    try {
+      const response = await create_confirmation(fullName);
+
+      if (!response.success) {
+        alert(response.error);
+        return;
+      }
+    } catch (error) {
+      console.error(error);
+
+      alert("Erro ao confirmar presença");
+    }
+  }
   return (
     <section className={styles.container} id='rsvp'>
       <TitleSVG title='CONFIRME SUA PRESENÇA' />
@@ -25,7 +47,7 @@ export function Rsvp() {
             onChange={(e) => setFullName(e.target.value)}
           />
         </div>
-        <button>Confirmar</button>
+        <button onClick={confirmation_create}>Confirmar</button>
       </div>
     </section>
   );
