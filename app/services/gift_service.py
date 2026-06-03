@@ -55,6 +55,12 @@ async def import_gifts_from_excel(file):
 
     db = SessionLocal()
 
+    if not file.filename.endswith(".xlsx"):
+        return {
+            "success": False,
+            "error": "Arquivo deve ser .xlsx"
+    }
+
     try:
 
         with NamedTemporaryFile(
