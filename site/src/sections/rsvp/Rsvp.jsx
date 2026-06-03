@@ -26,6 +26,7 @@ export function Rsvp() {
       console.error(error);
 
       alert("Erro ao confirmar presença");
+      return;
     } finally {
       alert("Muito obrigado por confirmar sua presença");
     }

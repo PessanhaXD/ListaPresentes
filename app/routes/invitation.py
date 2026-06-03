@@ -1,11 +1,16 @@
-from fastapi import APIRouter
+from fastapi import (
+    APIRouter,
+    UploadFile,
+    File
+)
 
 from app.models.invitation import (
-    InvitationCreate
+    InvitationConfirm
 )
 
 from app.services.invitation_service import (
-    confirm_invitation
+    confirm_invitation,
+    import_invitations_from_excel
 )
 
 router = APIRouter(
@@ -16,10 +21,19 @@ router = APIRouter(
 
 @router.post("/")
 def confirm(
-    invitation: InvitationCreate
+    invitation: InvitationConfirm
 ):
 
     return confirm_invitation(
-        invitation.name,
-        invitation.confirmed
+        invitation.name
+    )
+
+
+@router.post("/import")
+async def import_invitations(
+    file: UploadFile = File(...)
+):
+
+    return await import_invitations_from_excel(
+        file
     )
