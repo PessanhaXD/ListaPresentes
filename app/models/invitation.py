@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
 
-class InvitationConfirmed(BaseModel):
+class InvitationConfirm(BaseModel):
 
     name: str
