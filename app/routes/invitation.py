@@ -5,7 +5,7 @@ from app.models.invitation import (
 )
 
 from app.services.invitation_service import (
-    create_invitation
+    confirm_invitation
 )
 
 router = APIRouter(
@@ -15,10 +15,11 @@ router = APIRouter(
 
 
 @router.post("/")
-def create(
+def confirm(
     invitation: InvitationCreate
 ):
 
-    return create_invitation(
-        invitation.name
+    return confirm_invitation(
+        invitation.name,
+        invitation.confirmed
     )
