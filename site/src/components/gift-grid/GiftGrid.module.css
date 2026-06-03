@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 90%;
   padding: 0 9rem;
   gap: 4rem;
 }
@@ -25,6 +25,18 @@ button:disabled {
   opacity: 0.5;
 }
 
+.sortArea {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sortArea h3 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 0;
+}
+
 .gifts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
@@ -35,5 +47,15 @@ button:disabled {
 @media (max-width: 768px) {
   .actions {
     justify-content: center;
+  }
+
+  .sortArea {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .sortArea h3 {
+    font-size: 1.2rem;
   }
 }

@@ -1,10 +1,18 @@
-from fastapi import APIRouter
-
+from fastapi import (
+    APIRouter,
+    UploadFile,
+    File
+)
 from app.models.gift import GiftCreate
 
 from app.services.gift_service import (
     get_gifts,
     create_gift
+)
+
+
+from app.services.gift_service import (
+    import_gifts_from_excel
 )
 
 router = APIRouter(
@@ -29,3 +37,9 @@ def add_gift(
         value=gift.value,
         image=gift.image
     )
+
+@router.post("/import")
+async def import_gifts(
+    file: UploadFile = File(...)
+):
+    return await import_gifts_from_excel(file)
