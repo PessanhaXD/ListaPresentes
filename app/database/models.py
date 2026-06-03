@@ -116,6 +116,12 @@ class Invitation(Base):
         nullable=False
     )
 
+    confirmed = Column(
+        Boolean,
+        default=False,
+        nullable=False
+    )
+
     created_at = Column(
         DateTime,
         default=datetime.utcnow

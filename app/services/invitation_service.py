@@ -7,7 +7,7 @@ from app.database.models import (
 )
 
 
-def create_invitation(
+def confirm_invitation(
     name: str
 ):
 
@@ -17,7 +17,7 @@ def create_invitation(
 
     try:
 
-        existing_invitation = (
+        invitation = (
             db.query(Invitation)
             .filter(
                 Invitation.name == guest
@@ -25,26 +25,26 @@ def create_invitation(
             .first()
         )
 
-        if existing_invitation:
+        if not invitation:
 
             return {
                 "success": False,
-                "error": "Já confirmado"
+                "error": "Convite não encontrado"
             }
-        
-        invitation = Invitation(
-            name=guest
-        )
 
-        db.add(invitation)
+        if invitation.confirmed:
+
+            return {
+                "success": False,
+                "error": "Presença já confirmada"
+            }
+
+        invitation.confirmed = True
 
         db.commit()
 
-        db.refresh(invitation)
-
         return {
-            "success": True,
-            "id": invitation.id
+            "success": True
         }
 
     finally:
