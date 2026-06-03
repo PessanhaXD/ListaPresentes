@@ -6,6 +6,7 @@ import { PiShoppingCartThin } from "react-icons/pi";
 
 import { CardProduct } from "../card-product/CardProduct";
 import { SortSelect } from "../sort-select/SortSelect";
+import { SearchGift } from "../search-gift/SearchGift";
 
 export function GiftGrid({
   setCart,
@@ -21,7 +22,13 @@ export function GiftGrid({
     setCart(true);
   }
 
-  const sortedGifts = [...gifts];
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredGifts = gifts.filter((gift) =>
+    gift.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const sortedGifts = [...filteredGifts];
 
   switch (sortBy) {
     case "price_asc":
@@ -51,6 +58,8 @@ export function GiftGrid({
           <PiShoppingCartThin />
           Carrinho
         </button>
+
+        <SearchGift value={searchTerm} onChange={setSearchTerm} />
 
         <div className={styles.sortArea}>
           <h3>Ordenar a lista por:</h3>

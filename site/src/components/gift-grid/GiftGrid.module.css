@@ -39,14 +39,20 @@ button:disabled {
 
 .gifts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 20rem));
   gap: 2rem;
   max-width: 80%;
 }
 
 @media (max-width: 768px) {
   .actions {
-    justify-content: center;
+    width: 100%;
+    padding: 0 1rem;
+
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
   }
 
   .sortArea {
@@ -57,5 +63,17 @@ button:disabled {
 
   .sortArea h3 {
     font-size: 1.2rem;
+  }
+
+  .actions > :first-child {
+    align-self: flex-end;
+  }
+
+  .actions > :nth-child(2) {
+    order: -1;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }
