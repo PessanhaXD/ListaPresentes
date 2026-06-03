@@ -69,12 +69,16 @@ async def import_gifts_from_excel(file):
         ) as temp_file:
 
             content = await file.read()
+            print(file.filename)
+            print(len(content))
 
             temp_file.write(content)
 
-            workbook = load_workbook(
-                temp_file.name
-            )
+            temp_file.flush()
+
+        workbook = load_workbook(
+            temp_file.name
+        )
 
         sheet = workbook.active
 
