@@ -96,7 +96,7 @@ async def import_invitations_from_excel(
         skipped = 0
 
         for row in sheet.iter_rows(
-            min_row=2,
+            min_row=1,
             values_only=True
         ):
 

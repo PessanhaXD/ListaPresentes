@@ -11,7 +11,7 @@ export function Rsvp() {
 
   async function confirmation_create() {
     if (!fullName.trim()) {
-      alert("Informe o nome completo");
+      alert("Informe o nome igual ao convite");
 
       return;
     }
@@ -22,13 +22,12 @@ export function Rsvp() {
         alert(response.error);
         return;
       }
+      alert("Muito obrigado por confirmar sua presença");
     } catch (error) {
       console.error(error);
 
       alert("Erro ao confirmar presença");
       return;
-    } finally {
-      alert("Muito obrigado por confirmar sua presença");
     }
   }
   return (
