@@ -8,3 +8,5 @@ class PaymentRequest(BaseModel):
     payer_name: str
 
     payer_whatsapp: str
+
+    payer_message: str | None = None

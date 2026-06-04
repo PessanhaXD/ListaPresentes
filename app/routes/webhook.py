@@ -15,7 +15,6 @@ from app.database.connection import (
 )
 
 from app.database.models import (
-    Gift,
     Payment,
     PaymentGift
 )
@@ -80,10 +79,6 @@ async def mercadopago_webhook(
             "status"
         ) != "approved":
 
-            print(
-                "PAGAMENTO NÃO APROVADO"
-            )
-
             return {
                 "success": True
             }
@@ -111,6 +106,11 @@ async def mercadopago_webhook(
             "payer_whatsapp"
         ]
 
+        payer_message = external_reference.get(
+            "payer_message",
+            ""
+        )
+
         print(
             "GIFT_IDS:",
             gift_ids
@@ -133,28 +133,14 @@ async def mercadopago_webhook(
 
             if existing_payment:
 
-                print(
-                    "PAGAMENTO JÁ PROCESSADO"
-                )
-
                 return {
                     "success": True
                 }
 
-            gifts = (
-                db.query(Gift)
-                .filter(
-                    Gift.id.in_(
-                        gift_ids
-                    )
-                )
-                .all()
-            )
-
-
             new_payment = Payment(
                 payer_name=payer_name,
                 payer_whatsapp=payer_whatsapp,
+                payer_message=payer_message,
                 mercadopago_payment_id=str(
                     payment["id"]
                 ),
@@ -182,10 +168,6 @@ async def mercadopago_webhook(
 
             db.commit()
 
-            print(
-                "PAGAMENTO SALVO"
-            )
-
         finally:
 
             db.close()
@@ -195,11 +177,6 @@ async def mercadopago_webhook(
         }
 
     except Exception as e:
-
-        print(
-            "WEBHOOK ERROR:",
-            str(e)
-        )
 
         return {
             "success": False,

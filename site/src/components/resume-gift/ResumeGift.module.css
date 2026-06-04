@@ -78,6 +78,20 @@
   border-color: #638246;
 }
 
+.inputGroup textarea {
+  width: 100%;
+  min-height: 8rem;
+  padding: 1rem;
+
+  font-family: inherit;
+  font-size: 1.2rem;
+
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+
+  resize: none;
+}
+
 .actions {
   display: flex;
   justify-content: center;
@@ -113,6 +127,18 @@
 
 .primaryButton:hover {
   background: #4f6837;
+}
+
+.successMessage {
+  margin-top: 1rem;
+  color: #638246;
+  text-align: center;
+}
+
+.errorMessage {
+  margin-top: 1rem;
+  color: #c0392b;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

@@ -8,30 +8,60 @@ export function ResumeGift({ setResumeCart, cartList }) {
   const total = cartList.reduce((sum, gift) => sum + gift.value, 0);
 
   const [payerName, setPayerName] = useState("");
-
   const [payerWhatsapp, setPayerWhatsapp] = useState("");
+  const [payerMessage, setPayerMessage] = useState("");
+
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   async function payment_create() {
+    if (loading) return;
+
+    setMessage("");
+
     try {
       const gift_ids = cartList.map((gift) => gift.id);
 
       if (!payerName.trim() || !payerWhatsapp.trim()) {
-        alert("Todos os campos precisam ser preenchidos");
+        setMessage("Todos os campos precisam ser preenchidos");
+
+        setMessageType("error");
+
         return;
       }
 
-      const response = await create_payment(gift_ids, payerName, payerWhatsapp);
+      setLoading(true);
+
+      const response = await create_payment(
+        gift_ids,
+        payerName,
+        payerWhatsapp,
+        payerMessage,
+      );
 
       if (!response.success) {
-        alert(response.error);
+        setMessage(response.error);
+
+        setMessageType("error");
+
         return;
       }
+
+      setMessage("Redirecionando para o pagamento...");
+
+      setMessageType("success");
 
       window.open(response.payment_url, "_blank");
     } catch (error) {
       console.error(error);
 
-      alert("Erro ao gerar pagamento");
+      setMessage("Erro ao gerar pagamento");
+
+      setMessageType("error");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -92,8 +122,30 @@ export function ResumeGift({ setResumeCart, cartList }) {
               onChange={(e) => setPayerWhatsapp(e.target.value)}
             />
           </div>
+
+          <div className={styles.inputGroup}>
+            <h4>Mensagem aos noivos (opcional)</h4>
+
+            <textarea
+              placeholder='Deixe uma mensagem para os noivos...'
+              value={payerMessage}
+              onChange={(e) => setPayerMessage(e.target.value)}
+            />
+          </div>
         </div>
       </div>
+
+      {message && (
+        <p
+          className={
+            messageType === "success"
+              ? styles.successMessage
+              : styles.errorMessage
+          }
+        >
+          {message}
+        </p>
+      )}
 
       <div className={styles.actions}>
         <button
@@ -103,8 +155,12 @@ export function ResumeGift({ setResumeCart, cartList }) {
           Voltar para o carrinho
         </button>
 
-        <button className={styles.primaryButton} onClick={payment_create}>
-          Finalizar pedido
+        <button
+          className={styles.primaryButton}
+          onClick={payment_create}
+          disabled={loading}
+        >
+          {loading ? "Gerando pagamento..." : "Finalizar pedido"}
         </button>
       </div>
     </section>

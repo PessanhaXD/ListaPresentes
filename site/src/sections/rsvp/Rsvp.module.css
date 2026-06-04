@@ -68,6 +68,20 @@
   background: #ececec;
 }
 
+.successMessage {
+  margin-top: 1rem;
+  color: #638246;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.errorMessage {
+  margin-top: 1rem;
+  color: #c0392b;
+  font-size: 1rem;
+  text-align: center;
+}
+
 @media (prefers-color-scheme: dark) {
   .content button {
     background: #343434;

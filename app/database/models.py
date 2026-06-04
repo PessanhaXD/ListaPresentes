@@ -5,7 +5,8 @@ from sqlalchemy import (
     Float,
     Boolean,
     DateTime,
-    ForeignKey
+    ForeignKey,
+    Text
 )
 
 from sqlalchemy.orm import declarative_base
@@ -62,6 +63,10 @@ class Payment(Base):
 
     payer_whatsapp = Column(
         String(255)
+    )
+
+    payer_message = Column(
+        Text
     )
 
     mercadopago_payment_id = Column(

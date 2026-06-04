@@ -7,29 +7,45 @@ import { TitleSVG } from "../../components/title_svg/TitleSVG";
 import { create_confirmation } from "../../services/invites";
 
 export function Rsvp() {
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
+  const [loading, setLoading] = useState(false);
   const [fullName, setFullName] = useState("");
 
   async function confirmation_create() {
+    if (loading) return;
+
     if (!fullName.trim()) {
-      alert("Informe seu nome completo");
+      setMessage("Informe seu nome completo");
+      setMessageType("error");
       return;
     }
+
+    setLoading(true);
+
+    setMessage("Processando confirmação...");
+    setMessageType("success");
 
     try {
       const response = await create_confirmation(fullName);
 
       if (!response.success) {
-        alert(response.error);
+        setMessage(response.error);
+        setMessageType("error");
         return;
       }
 
       setFullName("");
 
-      alert("Muito obrigado por confirmar sua presença");
+      setMessage("Muito obrigado por confirmar sua presença!");
+      setMessageType("success");
     } catch (error) {
       console.error(error);
 
-      alert("Erro ao confirmar presença");
+      setMessage("Erro ao confirmar presença");
+      setMessageType("error");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -42,8 +58,7 @@ export function Rsvp() {
 
         <p>
           Sua presença tornará este momento ainda mais especial. Para confirmar
-          sua participação, informe abaixo o nome completo das pessoas incluídas
-          no convite.
+          sua participação, informe abaixo seu nome completo.
         </p>
 
         <div className={styles.input}>
@@ -57,7 +72,21 @@ export function Rsvp() {
           />
         </div>
 
-        <button onClick={confirmation_create}>Confirmar</button>
+        <button onClick={confirmation_create} disabled={loading}>
+          {loading ? "Confirmando..." : "Confirmar"}
+        </button>
+
+        {message && (
+          <p
+            className={
+              messageType === "success"
+                ? styles.successMessage
+                : styles.errorMessage
+            }
+          >
+            {message}
+          </p>
+        )}
       </div>
     </section>
   );
