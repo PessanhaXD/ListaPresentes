@@ -1,11 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=Allura&display=swap");
+
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 14rem;
+  margin-bottom: 6rem;
+
+  gap: 3rem;
+
+  padding: 0 2rem;
+}
+
+.content {
+  width: 80%;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  gap: 4rem;
+  background-image: url("../../assets/backgroundInformation.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 100% 100%;
+}
+
+.textFull {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 4rem;
+}
+
+.textFull h2 {
+  font-size: 2.4rem;
+
+  line-height: 1.25;
+
+  color: #638246;
+
+  font-family: "Times New Roman", serif;
+
+  max-width: 52rem;
+}
+
+.text {
+  display: flex;
   flex-direction: column;
 
-  margin-top: 18rem;
-  margin-bottom: 4rem;
+  gap: 1.8rem;
+}
 
-  gap: 2rem;
+.text p {
+  line-height: 1.9;
+  width: 80%;
+  text-align: justify;
+}
+
+.text h2 {
+  font-family: "Allura", cursive;
+
+  font-size: 3rem;
+
+  color: #cda86a;
+
+  line-height: 1.2;
+
+  text-align: center;
+
+  padding-top: 2rem;
+}
+
+.heart {
+  margin-top: 1rem;
+
+  font-size: 3rem;
+
+  color: #cda86a;
+
+  font-family: "Times New Roman", serif;
+}
+
+.imageWrapper {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+}
+
+.image {
+  width: 80%;
+  max-width: 36rem;
+  height: 48rem;
+
+  object-fit: cover;
+
+  border-radius: 22rem 22rem 2rem 2rem;
+
+  border: 0.1rem solid rgba(201, 170, 103, 0.7);
+
+  padding: 1rem;
+
+  position: relative;
+  z-index: 2;
+}
+
+.imageDecorator {
+  position: absolute;
+
+  width: 18rem;
+
+  right: 10rem;
+  bottom: -92rem;
+
+  opacity: 0.9;
+
+  z-index: 3;
+
+  pointer-events: none;
+}
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-top: 20rem;
+
+    padding: 0 1.5rem;
+  }
+
+  .content {
+    flex-direction: column;
+
+    gap: 4rem;
+
+    background-position: 100% 55%;
+  }
+
+  .mobile {
+    display: flex;
+    flex-direction: column;
+    font-family: "Allura", cursive;
+
+    font-size: 3rem;
+
+    color: #cda86a;
+
+    line-height: 1.2;
+
+    text-align: center;
+  }
+
+  .web {
+    display: none;
+  }
+
+  .imageDecorator {
+    bottom: -95rem;
+    right: 5rem;
+    width: 12rem;
+  }
+
+  .textFull {
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .textFull h2 {
+    font-size: 2rem;
+
+    max-width: 100%;
+  }
+
+  .text {
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .image {
+    max-width: 32rem;
+    height: 40rem;
+  }
 }

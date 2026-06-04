@@ -31,11 +31,8 @@ export function Location() {
         </p>
 
         <p>
-          Cada detalhe deste dia está sendo preparado com amor, e nossa maior
-          felicidade será poder viver esse momento cercados por familiares e
-          amigos que acompanharam nossa caminhada até aqui. Esperamos vocês para
-          celebrar, sorrir, se emocionar e criar conosco lembranças que ficarão
-          guardadas para sempre.
+          Estamos preparando cada detalhe deste dia com muito amor e esperamos
+          vocês para celebrar conosco esse momento tão especial.
         </p>
       </div>
 
@@ -48,6 +45,24 @@ export function Location() {
         loading='lazy'
         referrerPolicy='no-referrer-when-downgrade'
       ></iframe>
+
+      <div className={styles.locationActions}>
+        <a
+          href='https://maps.google.com/?q=Casa+de+Festas+Mansão+Valqueire'
+          target='_blank'
+          rel='noreferrer'
+        >
+          Ir pelo Google Maps
+        </a>
+
+        <a
+          href='https://waze.com/ul?q=Casa+de+Festas+Mansão+Valqueire'
+          target='_blank'
+          rel='noreferrer'
+        >
+          Ir pelo Waze
+        </a>
+      </div>
     </section>
   );
 }

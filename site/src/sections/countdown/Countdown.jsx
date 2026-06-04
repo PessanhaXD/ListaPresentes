@@ -21,7 +21,7 @@ export function Countdown() {
 
   return (
     <section className={styles.container}>
-      <h2 className={styles.textCountdown}>CONTAGEM REGRESSIVA</h2>
+      <h2 className={styles.textCountdown}>FALTAM APENAS</h2>
       <div className={styles.countdown}>
         <CountdownCard value={countdown.days} unit='DIAS' />
         <CountdownCard value={countdown.hours} unit='HORAS' />

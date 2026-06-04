@@ -24,6 +24,52 @@
   border: 0;
 }
 
+.locationActions {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+
+  margin-top: 2rem;
+
+  flex-wrap: wrap;
+
+  width: 60%;
+}
+
+.locationActions a {
+  text-decoration: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30%;
+
+  background: rgba(99, 130, 70);
+
+  border: 1px solid rgba(99, 130, 70, 0.25);
+
+  color: #fff;
+
+  padding: 0.85rem 1.5rem;
+
+  border-radius: 10rem;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.locationActions a:hover {
+  background: rgb(67, 88, 47);
+  color: #fff;
+
+  border-color: rgba(0, 0, 0, 0.25);
+
+  transform: translateY(-2px);
+}
+
 @media (max-width: 768px) {
   .maps {
     width: 100%;
@@ -31,5 +77,9 @@
 
   .container p {
     width: 100%;
+  }
+
+  .locationActions a {
+    width: 400%;
   }
 }

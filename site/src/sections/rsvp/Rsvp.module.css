@@ -8,7 +8,8 @@
 }
 
 .content {
-  border: solid 0.1rem #000;
+  border: solid 0.1rem #00000020;
+  border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;

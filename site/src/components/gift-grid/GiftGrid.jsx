@@ -23,6 +23,7 @@ export function GiftGrid({
   }
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [visibleCount, setVisibleCount] = useState(8);
 
   const filteredGifts = gifts.filter((gift) =>
     gift.name.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -76,7 +77,7 @@ export function GiftGrid({
 
       {!loading && !error && (
         <div className={styles.gifts}>
-          {sortedGifts.map((gift) => (
+          {sortedGifts.slice(0, visibleCount).map((gift) => (
             <CardProduct
               key={gift.id}
               {...gift}
@@ -93,6 +94,13 @@ export function GiftGrid({
               }}
             />
           ))}
+        </div>
+      )}
+      {visibleCount < sortedGifts.length && (
+        <div className={styles.showMoreArea}>
+          <button onClick={() => setVisibleCount((prev) => prev + 8)}>
+            Mostrar mais presentes
+          </button>
         </div>
       )}
     </>
