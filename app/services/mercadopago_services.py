@@ -20,7 +20,8 @@ sdk = mercadopago.SDK(
 def mp_create_payment(
     gift_ids: list[int],
     payer_name: str,
-    payer_whatsapp: str
+    payer_whatsapp: str,
+    payer_message: str
 ):
 
     db = SessionLocal()
@@ -75,7 +76,8 @@ def mp_create_payment(
                 {
                     "gift_ids": gift_ids,
                     "payer_name": payer_name,
-                    "payer_whatsapp": payer_whatsapp
+                    "payer_whatsapp": payer_whatsapp,
+                    "payer_message": payer_message
                 }
             ),
             "notification_url":
