@@ -36,6 +36,10 @@ export function Hero() {
           '
         />
       </svg>
+      <div className={styles.mobileDataname}>
+        <h1>Rafael e Vitória</h1>
+        <h3>Enlace</h3>
+      </div>
     </section>
   );
 }

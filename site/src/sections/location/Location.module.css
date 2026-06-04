@@ -11,8 +11,12 @@
   color: #638246;
 }
 
-.container p {
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   margin-top: 2rem;
+  align-items: center;
 }
 
 .maps {

@@ -28,6 +28,12 @@ h2 {
 p {
   width: 60%;
   font-size: 1.4rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+span {
+  font-weight: 700;
 }
 
 a {
