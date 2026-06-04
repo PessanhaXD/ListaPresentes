@@ -11,10 +11,10 @@ export function Rsvp() {
 
   async function confirmation_create() {
     if (!fullName.trim()) {
-      alert("Informe o nome igual ao convite");
-
+      alert("Informe seu nome completo");
       return;
     }
+
     try {
       const response = await create_confirmation(fullName);
 
@@ -22,33 +22,41 @@ export function Rsvp() {
         alert(response.error);
         return;
       }
+
+      setFullName("");
+
       alert("Muito obrigado por confirmar sua presença");
     } catch (error) {
       console.error(error);
 
       alert("Erro ao confirmar presença");
-      return;
     }
   }
+
   return (
     <section className={styles.container} id='rsvp'>
       <TitleSVG title='CONFIRME SUA PRESENÇA' />
 
       <div className={styles.content}>
-        <h3>Encontre seu convite</h3>
+        <h3>Confirme sua presença</h3>
+
         <p>
           Sua presença tornará este momento ainda mais especial. Para confirmar
           sua participação, informe abaixo o nome completo das pessoas incluídas
           no convite.
         </p>
+
         <div className={styles.input}>
           <h4>Nome Completo</h4>
+
           <input
             type='text'
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
+            placeholder='Digite seu nome completo'
           />
         </div>
+
         <button onClick={confirmation_create}>Confirmar</button>
       </div>
     </section>
