@@ -19,6 +19,8 @@ from app.database.models import (
     PaymentGift
 )
 
+from app.services.callmebot_service import (send_whatsapp_notification)
+
 sdk = mercadopago.SDK(
     MERCADOPAGO_ACCESS_TOKEN
 )
@@ -167,6 +169,36 @@ async def mercadopago_webhook(
                 )
 
             db.commit()
+
+            message = f"""
+            🎁 Novo presente confirmado!
+
+            👤 {payer_name}
+            📱 {payer_whatsapp}
+            💰 R$ {payment['transaction_amount']}
+
+            ❤️ Enlace Rafael & Vitória
+            """
+
+            notification_response = (
+                await send_whatsapp_notification(
+                message
+                )
+            )
+
+            if not notification_response[
+                "success"
+            ]:
+
+
+                print(
+                    "CALLMEBOT ERROR:",
+                    notification_response[
+                        "error"
+                    ]
+                )
+
+
 
         finally:
 
