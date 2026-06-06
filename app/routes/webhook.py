@@ -37,183 +37,179 @@ async def mercadopago_webhook(
 request: Request
 ):
 
-
-try:
-
-    data = await request.json()
-
-    print(
-        "WEBHOOK:",
-        data
-    )
-
-    if "data" not in data:
-
-        return {
-            "success": True
-        }
-
-    payment_id = data[
-        "data"
-    ][
-        "id"
-    ]
-
-    print(
-        "PAYMENT ID:",
-        payment_id
-    )
-
-    payment_response = (
-        sdk.payment().get(
-            payment_id
-        )
-    )
-
-    payment = payment_response[
-        "response"
-    ]
-
-    print(
-        "PAYMENT:",
-        payment
-    )
-
-    if payment.get(
-        "status"
-    ) != "approved":
-
-        return {
-            "success": True
-        }
-
-    external_reference = json.loads(
-        payment[
-            "external_reference"
-        ]
-    )
-
-    print(
-        "EXTERNAL_REFERENCE:",
-        external_reference
-    )
-
-    gift_ids = external_reference[
-        "gift_ids"
-    ]
-
-    payer_name = external_reference[
-        "payer_name"
-    ]
-
-    payer_whatsapp = external_reference[
-        "payer_whatsapp"
-    ]
-
-    payer_message = external_reference.get(
-        "payer_message",
-        ""
-    )
-
-    print(
-        "GIFT_IDS:",
-        gift_ids
-    )
-
-    db = SessionLocal()
-
     try:
 
-        existing_payment = (
-            db.query(Payment)
-            .filter(
-                Payment.mercadopago_payment_id
-                == str(
-                    payment["id"]
-                )
-            )
-            .first()
+        data = await request.json()
+
+        print(
+            "WEBHOOK:",
+            data
         )
 
-        if existing_payment:
+        if "data" not in data:
 
             return {
                 "success": True
             }
 
-        new_payment = Payment(
-            payer_name=payer_name,
-            payer_whatsapp=payer_whatsapp,
-            payer_message=payer_message,
-            mercadopago_payment_id=str(
-                payment["id"]
-            ),
-            value=payment[
-                "transaction_amount"
+        payment_id = data[
+            "data"
+        ][
+            "id"
+        ]
+
+        print(
+            "PAYMENT ID:",
+            payment_id
+        )
+
+        payment_response = (
+            sdk.payment().get(
+                payment_id
+            )
+        )
+
+        payment = payment_response[
+            "response"
+        ]
+
+        print(
+            "PAYMENT:",
+            payment
+        )
+
+        if payment.get(
+            "status"
+        ) != "approved":
+
+            return {
+                "success": True
+            }
+
+        external_reference = json.loads(
+            payment[
+                "external_reference"
             ]
         )
 
-        db.add(
-            new_payment
+        print(
+            "EXTERNAL_REFERENCE:",
+            external_reference
         )
 
-        db.flush()
+        gift_ids = external_reference[
+            "gift_ids"
+        ]
 
-        for gift_id in gift_ids:
+        payer_name = external_reference[
+            "payer_name"
+        ]
 
-            payment_gift = PaymentGift(
-                payment_id=new_payment.id,
-                gift_id=gift_id
+        payer_whatsapp = external_reference[
+            "payer_whatsapp"
+        ]
+
+        payer_message = external_reference.get(
+            "payer_message",
+            ""
+        )
+
+        print(
+            "GIFT_IDS:",
+            gift_ids
+        )
+
+        db = SessionLocal()
+
+        try:
+
+            existing_payment = (
+                db.query(Payment)
+                .filter(
+                    Payment.mercadopago_payment_id
+                    == str(
+                        payment["id"]
+                    )
+                )
+                .first()
+            )
+
+            if existing_payment:
+
+                return {
+                    "success": True
+                }
+
+            new_payment = Payment(
+                payer_name=payer_name,
+                payer_whatsapp=payer_whatsapp,
+                payer_message=payer_message,
+                mercadopago_payment_id=str(
+                    payment["id"]
+                ),
+                value=payment[
+                    "transaction_amount"
+                ]
             )
 
             db.add(
-                payment_gift
+                new_payment
             )
 
-        db.commit()
+            db.flush()
 
-    finally:
+            for gift_id in gift_ids:
 
-        db.close()
+                payment_gift = PaymentGift(
+                    payment_id=new_payment.id,
+                    gift_id=gift_id
+                )
 
-    message = f"""
+                db.add(
+                    payment_gift
+                )
 
+            db.commit()
 
-🎁 Novo presente confirmado!
+        finally:
 
-👤 {payer_name}
-📱 {payer_whatsapp}
-💰 R$ {payment['transaction_amount']}
+            db.close()
 
-❤️ Enlace Rafael & Vitória
-"""
+        message = f"""
 
+    🎁 Novo presente confirmado!
 
-    notification_response = (
-        await send_whatsapp_notification(
-            message
+    👤 {payer_name}
+    📱 {payer_whatsapp}
+    💰 R$ {payment['transaction_amount']}
+
+    ❤️ Enlace Rafael & Vitória
+    """
+
+        notification_response = (
+            await send_whatsapp_notification(
+                message
+            )
         )
-    )
 
-    if not notification_response[
-        "success"
-    ]:
+        if not notification_response[
+            "success"
+        ]:
 
-        print(
-            "CALLMEBOT ERROR:",
-            notification_response[
-                "error"
-            ]
-        )
+            print(
+                "CALLMEBOT ERROR:",
+                notification_response[
+                    "error"
+                ]
+            )
 
-    return {
-        "success": True
-    }
+        return {
+            "success": True
+        }
 
-except Exception as e:
+    except Exception as e:
 
-    return {
-        "success": False,
-        "error": str(e)
-    }
-
+        return {
+            "success": False,
+            "error": str(e)
+        }
