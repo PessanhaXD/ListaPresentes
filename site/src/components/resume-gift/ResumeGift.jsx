@@ -1,20 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./ResumeGift.module.css";
 
 import { create_payment } from "../../services/payments";
 
+import { ThankYou } from "../thank-you/ThankYou";
+
 export function ResumeGift({ setResumeCart, cartList }) {
   const total = cartList.reduce((sum, gift) => sum + gift.value, 0);
 
   const [payerName, setPayerName] = useState("");
+
   const [payerWhatsapp, setPayerWhatsapp] = useState("");
+
   const [payerMessage, setPayerMessage] = useState("");
 
   const [message, setMessage] = useState("");
+
   const [messageType, setMessageType] = useState("");
 
   const [loading, setLoading] = useState(false);
+
+  const [checkoutId, setCheckoutId] = useState("");
+
+  const [paymentApproved, setPaymentApproved] = useState(false);
 
   async function payment_create() {
     if (loading) return;
@@ -49,6 +58,8 @@ export function ResumeGift({ setResumeCart, cartList }) {
         return;
       }
 
+      setCheckoutId(response.checkout_id);
+
       setMessage("Redirecionando para o pagamento...");
 
       setMessageType("success");
@@ -65,10 +76,38 @@ export function ResumeGift({ setResumeCart, cartList }) {
     }
   }
 
+  useEffect(() => {
+    if (!checkoutId) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/payments/status/${checkoutId}`,
+        );
+
+        const data = await response.json();
+
+        if (data.approved) {
+          setPaymentApproved(true);
+
+          clearInterval(interval);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [checkoutId]);
+
+  if (paymentApproved) {
+    return <ThankYou />;
+  }
+
   return (
     <section className={styles.container}>
-      <h3 className={styles.title}>Resumo da sua compra</h3>
-
+      {" "}
+      <h3 className={styles.title}>Resumo da sua compra </h3>
       <div className={styles.content}>
         <div className={styles.orderSummary}>
           <div className={styles.totalRow}>
@@ -78,6 +117,7 @@ export function ResumeGift({ setResumeCart, cartList }) {
               Total: R${" "}
               {total.toLocaleString("pt-BR", {
                 minimumFractionDigits: Number.isInteger(total) ? 0 : 2,
+
                 maximumFractionDigits: 2,
               })}
             </h4>
@@ -92,6 +132,7 @@ export function ResumeGift({ setResumeCart, cartList }) {
                   R${" "}
                   {gift.value.toLocaleString("pt-BR", {
                     minimumFractionDigits: Number.isInteger(gift.value) ? 0 : 2,
+
                     maximumFractionDigits: 2,
                   })}
                 </span>
@@ -134,7 +175,6 @@ export function ResumeGift({ setResumeCart, cartList }) {
           </div>
         </div>
       </div>
-
       {message && (
         <p
           className={
@@ -146,7 +186,6 @@ export function ResumeGift({ setResumeCart, cartList }) {
           {message}
         </p>
       )}
-
       <div className={styles.actions}>
         <button
           className={styles.secondaryButton}

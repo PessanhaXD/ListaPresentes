@@ -2,53 +2,37 @@ import json
 import mercadopago
 import re
 
-from app.config.settings import (
-    MERCADOPAGO_ACCESS_TOKEN
-)
+from app.config.settings import MERCADOPAGO_ACCESS_TOKEN
 
-from app.database.connection import (
-    SessionLocal
-)
+from app.database.connection import SessionLocal
 
-from app.database.models import Gift
+from app.database.models import Gift, Payment
 
-sdk = mercadopago.SDK(
-    MERCADOPAGO_ACCESS_TOKEN
-)
+import uuid
+
+sdk = mercadopago.SDK(MERCADOPAGO_ACCESS_TOKEN)
 
 
 def mp_create_payment(
-    gift_ids: list[int],
-    payer_name: str,
-    payer_whatsapp: str,
-    payer_message: str
+    gift_ids: list[int], payer_name: str, payer_whatsapp: str, payer_message: str
 ):
 
     db = SessionLocal()
 
     try:
 
-        gifts = db.query(Gift).filter(
-            Gift.id.in_(gift_ids)
-        ).all()
+        gifts = db.query(Gift).filter(Gift.id.in_(gift_ids)).all()
 
         if len(gifts) != len(gift_ids):
 
-            return {
-                "success": False,
-                "error": "Gift not found"
-            }
-        
-        payer_whatsapp = re.sub(
-            r"\D",
-            "",
-            payer_whatsapp
-        )
+            return {"success": False, "error": "Gift not found"}
+
+        payer_whatsapp = re.sub(r"\D", "", payer_whatsapp)
 
         if len(payer_whatsapp) != 11:
             return {
-                'success': False,
-                'error':'Whatsapp não preenchido corretamente, digite "DDD + Número de Telefone" '
+                "success": False,
+                "error": 'Whatsapp não preenchido corretamente, digite "DDD + Número de Telefone" ',
             }
 
         items = []
@@ -64,11 +48,10 @@ def mp_create_payment(
                     "title": gift.name,
                     "quantity": 1,
                     "currency_id": "BRL",
-                    "unit_price": float(
-                        gift.value
-                    )
+                    "unit_price": float(gift.value),
                 }
             )
+        checkout_id = str(uuid.uuid4())
 
         preference_data = {
             "items": items,
@@ -77,16 +60,14 @@ def mp_create_payment(
                     "gift_ids": gift_ids,
                     "payer_name": payer_name,
                     "payer_whatsapp": payer_whatsapp,
-                    "payer_message": payer_message
+                    "payer_message": payer_message,
+                    "checkout_id": checkout_id,
                 }
             ),
-            "notification_url":
-                "https://listapresentes.onrender.com/webhook/mercadopago"
+            "notification_url": "https://listapresentes.onrender.com/webhook/mercadopago",
         }
 
-        response = sdk.preference().create(
-            preference_data
-        )
+        response = sdk.preference().create(preference_data)
 
         preference = response["response"]
 
@@ -94,20 +75,33 @@ def mp_create_payment(
             "success": True,
             "gift_ids": gift_ids,
             "total_value": total_value,
-            "payment_url": preference[
-                "init_point"
-            ],
-            "payment_id": preference[
-                "id"
-            ]
+            "payment_url": preference["init_point"],
+            "payment_id": preference["id"],
+            "checkout_id": checkout_id,
         }
 
     except Exception as e:
 
-        return {
-            "success": False,
-            "error": str(e)
-        }
+        return {"success": False, "error": str(e)}
+
+    finally:
+
+        db.close()
+
+
+def mp_payment_status(checkout_id: str):
+
+    db = SessionLocal()
+
+    try:
+
+        payment = db.query(Payment).filter(Payment.checkout_id == checkout_id).first()
+
+        return {"success": True, "approved": payment is not None}
+
+    except Exception as e:
+
+        return {"success": False, "error": str(e)}
 
     finally:
 

@@ -55,6 +55,8 @@ async def mercadopago_webhook(request: Request):
 
         payer_message = external_reference.get("payer_message", "")
 
+        checkout_id = external_reference["checkout_id"]
+
         print("GIFT_IDS:", gift_ids)
 
         db = SessionLocal()
@@ -77,6 +79,7 @@ async def mercadopago_webhook(request: Request):
                 payer_message=payer_message,
                 mercadopago_payment_id=str(payment["id"]),
                 value=payment["transaction_amount"],
+                checkout_id=checkout_id,
             )
 
             db.add(new_payment)
