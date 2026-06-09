@@ -7,6 +7,13 @@
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
     url("../../assets/backgroundCongratulations.png");
+  background-size: cover;
+  background-position: center;
+  gap: 4rem;
+  color: #638246;
+}
+
+.content {
   gap: 2rem;
 }
 
@@ -14,7 +21,6 @@
   font-family: "Playfair Display", serif;
   line-height: 2;
   font-size: 1.8rem;
-  color: #638246;
 }
 
 .messageTitle {
@@ -22,7 +28,7 @@
 }
 
 .messageName {
-  letter-spacing: 1.1rem;
+  letter-spacing: 0.6rem;
   font-size: 3.4rem;
 }
 
@@ -37,5 +43,15 @@
 .button:hover {
   background-color: #4d6535;
   border-color: #495f33;
-  transform: translateY(0.3rem);
+  transform: translateY(-0.3rem);
+}
+
+@media (max-width: 768px) {
+  .messageTitle {
+    font-size: 3.2rem;
+  }
+
+  .messageName {
+    font-size: 2.4rem;
+  }
 }

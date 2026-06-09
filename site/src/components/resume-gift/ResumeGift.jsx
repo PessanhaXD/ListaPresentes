@@ -100,7 +100,7 @@ export function ResumeGift({ setResumeCart, cartList, setCart, setCartList }) {
     return () => clearInterval(interval);
   }, [checkoutId]);
 
-  if (paymentApproved) {
+  if (!paymentApproved) {
     return (
       <ThankYou
         setCartList={setCartList}
