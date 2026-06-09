@@ -99,16 +99,15 @@ async def mercadopago_webhook(request: Request):
             db.close()
 
         message = f"""
-
     🎁 Novo presente confirmado!
 
     👤 {payer_name}
     📱 {payer_whatsapp}
-    💰 R$ {payment['transaction_amount']}
+    💰 R$ {f"{payment['transaction_amount']:.2f}".replace(".", ",")}
 
     ❤️ Enlace Rafael & Vitória
     
-    {payer_message}
+    💌 {payer_message}
     """
 
         notification_response = await send_whatsapp_notification(message)
