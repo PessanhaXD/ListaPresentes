@@ -20,6 +20,11 @@
   background-color: #4a5e2b;
 }
 
+.button {
+  display: flex;
+  gap: 1rem;
+}
+
 button:disabled {
   cursor: default;
   opacity: 0.5;

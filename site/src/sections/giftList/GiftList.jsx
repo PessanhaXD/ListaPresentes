@@ -39,7 +39,7 @@ export function GiftList() {
     }
 
     loadGifts();
-  }, []);
+  }, [cart]);
   return (
     <section className={styles.container} id='gifts'>
       <TitleSVG title='LISTA DE PRESENTES' />

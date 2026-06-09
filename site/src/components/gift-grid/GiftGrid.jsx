@@ -52,10 +52,32 @@ export function GiftGrid({
       break;
   }
 
+  function handleGift(gift) {
+    const alreadyExists = cartList.some((item) => item.id === gift.id);
+
+    if (alreadyExists) {
+      return;
+    }
+
+    setCartList((prev) => [
+      ...prev,
+      {
+        ...gift,
+        cartId: crypto.randomUUID(),
+      },
+    ]);
+
+    setCart(true);
+  }
+
   return (
     <>
       <div className={styles.actions}>
-        <button disabled={cartList.length === 0} onClick={openCart}>
+        <button
+          className={styles.button}
+          disabled={cartList.length === 0}
+          onClick={openCart}
+        >
           <PiShoppingCartThin />
           Carrinho
         </button>
@@ -81,17 +103,7 @@ export function GiftGrid({
             <CardProduct
               key={gift.id}
               {...gift}
-              onClick={() => {
-                setCartList((prev) => [
-                  ...prev,
-                  {
-                    ...gift,
-                    cartId: crypto.randomUUID(),
-                  },
-                ]);
-
-                setCart(true);
-              }}
+              onClick={() => handleGift(gift)}
             />
           ))}
         </div>
