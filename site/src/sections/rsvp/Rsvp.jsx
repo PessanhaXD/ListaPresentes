@@ -58,17 +58,17 @@ export function Rsvp() {
 
         <p>
           Sua presença tornará este momento ainda mais especial. Para confirmar
-          sua participação, informe abaixo seu nome completo.
+          sua participação, informe abaixo seu nome e sobrenome.
         </p>
 
         <div className={styles.input}>
-          <h4>Nome Completo</h4>
+          <h4>Nome e Sobrenome</h4>
 
           <input
             type='text'
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            placeholder='Digite seu nome completo'
+            placeholder='Digite seu nome'
           />
         </div>
 
