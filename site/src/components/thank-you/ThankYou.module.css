@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  padding: 7.2rem 4rem;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    url("../../assets/backgroundCongratulations.png");
+  gap: 2rem;
+}
+
+.messageCongratulations {
+  font-family: "Playfair Display", serif;
+  line-height: 2;
+  font-size: 1.8rem;
+  color: #638246;
+}
+
+.messageTitle {
+  font-size: 5.6rem;
+}
+
+.messageName {
+  letter-spacing: 1.1rem;
+  font-size: 3.4rem;
+}
+
+.button {
+  background: #638246;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  color: #fff;
+  border: solid 0.1rem #638246;
+}
+
+.button:hover {
+  background-color: #4d6535;
+  border-color: #495f33;
+  transform: translateY(0.3rem);
+}

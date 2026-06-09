@@ -15,7 +15,12 @@ export function Cart({ setCart, cartList, setCartList }) {
   return (
     <div className={styles.container}>
       {resumeCart ? (
-        <ResumeGift setResumeCart={setResumeCart} cartList={cartList} />
+        <ResumeGift
+          setResumeCart={setResumeCart}
+          cartList={cartList}
+          setCart={setCart}
+          setCartList={setCartList}
+        />
       ) : (
         <CartList
           setCart={setCart}

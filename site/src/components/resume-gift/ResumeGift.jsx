@@ -6,7 +6,7 @@ import { create_payment } from "../../services/payments";
 
 import { ThankYou } from "../thank-you/ThankYou";
 
-export function ResumeGift({ setResumeCart, cartList }) {
+export function ResumeGift({ setResumeCart, cartList, setCart, setCartList }) {
   const total = cartList.reduce((sum, gift) => sum + gift.value, 0);
 
   const [payerName, setPayerName] = useState("");
@@ -101,7 +101,13 @@ export function ResumeGift({ setResumeCart, cartList }) {
   }, [checkoutId]);
 
   if (paymentApproved) {
-    return <ThankYou />;
+    return (
+      <ThankYou
+        setCartList={setCartList}
+        setCart={setCart}
+        setCheckoutId={setCheckoutId}
+      />
+    );
   }
 
   return (
