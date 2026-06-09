@@ -43,6 +43,8 @@ export function ResumeGift({ setResumeCart, cartList, setCart, setCartList }) {
 
       setLoading(true);
 
+      const paymentWindow = window.open("", "_blank");
+
       const response = await create_payment(
         gift_ids,
         payerName,
@@ -64,7 +66,7 @@ export function ResumeGift({ setResumeCart, cartList, setCart, setCartList }) {
 
       setMessageType("success");
 
-      window.open(response.payment_url, "_blank");
+      paymentWindow.location.href = response.payment_url;
     } catch (error) {
       console.error(error);
 
@@ -100,7 +102,7 @@ export function ResumeGift({ setResumeCart, cartList, setCart, setCartList }) {
     return () => clearInterval(interval);
   }, [checkoutId]);
 
-  if (!paymentApproved) {
+  if (paymentApproved) {
     return (
       <ThankYou
         setCartList={setCartList}
