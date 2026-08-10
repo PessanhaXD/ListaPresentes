@@ -56,7 +56,7 @@ export function Location() {
         </a>
 
         <a
-          href='https://waze.com/ul?q=Casa+de+Festas+Mansão+Valqueire'
+          href='https://www.waze.com/ul?ll=-22.881745,-43.363586&navigate=yes'
           target='_blank'
           rel='noreferrer'
         >
