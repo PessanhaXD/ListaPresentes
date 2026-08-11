@@ -36,7 +36,8 @@
   width: 60%;
 }
 
-.locationActions a {
+.locationActions a,
+.locationActions button {
   text-decoration: none;
 
   display: flex;
@@ -61,7 +62,8 @@
     border-color 0.2s ease;
 }
 
-.locationActions a:hover {
+.locationActions a:hover,
+.locationActions button:hover {
   background: rgb(67, 88, 47);
   color: #fff;
 
@@ -79,7 +81,8 @@
     width: 100%;
   }
 
-  .locationActions a {
+  .locationActions a,
+  .locationActions button {
     width: 400%;
   }
 }

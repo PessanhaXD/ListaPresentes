@@ -4,6 +4,8 @@ import styles from "./Location.module.css";
 
 import { TitleSVG } from "../../components/title_svg/TitleSVG";
 
+import openWaze from "../../utils/locale";
+
 export function Location() {
   return (
     <section className={styles.container} id='location'>
@@ -55,13 +57,7 @@ export function Location() {
           Ir pelo Google Maps
         </a>
 
-        <a
-          href='https://www.waze.com/ul?ll=-22.881745,-43.363586&navigate=yes'
-          target='_blank'
-          rel='noreferrer'
-        >
-          Ir pelo Waze
-        </a>
+        <button onClick={openWaze}>Ir pelo Waze</button>
       </div>
     </section>
   );
