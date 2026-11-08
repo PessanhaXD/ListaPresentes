@@ -39,10 +39,52 @@ async def mercadopago_webhook(request: Request):
 
         print("PAYMENT:", payment)
 
-        if payment.get("status") != "approved":
+        status = payment.get("status")
+
+        # PAGAMENTO RECUSADO
+        if status == "rejected":
+
+            try:
+                external_reference = json.loads(
+                    payment.get("external_reference") or "{}"
+                )
+            except (json.JSONDecodeError, TypeError):
+                external_reference = {}
+
+            payer_name = external_reference.get("payer_name", "Não identificado")
+
+            payer_whatsapp = external_reference.get("payer_whatsapp", "Não informado")
+
+            status_detail = payment.get("status_detail", "Não informado")
+
+            message = f"""
+⚠️ PAGAMENTO RECUSADO!
+
+👤 Cliente: {payer_name}
+📱 WhatsApp: {payer_whatsapp}
+💰 Valor: R$ {payment.get("transaction_amount", 0):.2f}
+
+❌ Status: {status}
+🔎 Detalhe: {status_detail}
+
+🆔 Payment ID: {payment.get("id")}
+
+❤️ Enlace Rafael & Vitória
+"""
+
+            notification_response = await send_whatsapp_notification(message)
+
+            if not notification_response["success"]:
+                print("CALLMEBOT ERROR:", notification_response["error"])
 
             return {"success": True}
 
+        # OUTROS STATUS (PENDING, IN_PROCESS ETC.)
+        if status != "approved":
+
+            return {"success": True}
+
+        # PAGAMENTO APROVADO
         external_reference = json.loads(payment["external_reference"])
 
         print("EXTERNAL_REFERENCE:", external_reference)
@@ -98,17 +140,18 @@ async def mercadopago_webhook(request: Request):
 
             db.close()
 
+        # NOTIFICAÇÃO DE PAGAMENTO APROVADO
         message = f"""
-    🎁 Novo presente confirmado!
+🎁 Novo presente confirmado!
 
-    👤 {payer_name}
-    📱 {payer_whatsapp}
-    💰 R$ {f"{payment['transaction_amount']:.2f}".replace(".", ",")}
+👤 {payer_name}
+📱 {payer_whatsapp}
+💰 R$ {f"{payment['transaction_amount']:.2f}".replace(".", ",")}
 
-    ❤️ Enlace Rafael & Vitória
-    
-    💌 {payer_message}
-    """
+❤️ Enlace Rafael & Vitória
+
+💌 {payer_message}
+"""
 
         notification_response = await send_whatsapp_notification(message)
 
@@ -119,5 +162,7 @@ async def mercadopago_webhook(request: Request):
         return {"success": True}
 
     except Exception as e:
+
+        print("WEBHOOK ERROR:", str(e))
 
         return {"success": False, "error": str(e)}
